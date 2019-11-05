@@ -1,0 +1,75 @@
+### List of Entities
+GET http://localhost:4004/catalog
+
+### Read Metadata
+GET http://localhost:4004/catalog/$metadata
+
+### Read all Books
+GET http://localhost:4004/catalog/Books
+
+### Read all Authors
+GET http://localhost:4004/catalog/Authors
+
+### Read one Book
+GET http://localhost:4004/catalog/Books(421)
+
+### Read an Author
+GET http://localhost:4004/catalog/Authors(42)
+
+### Read Books of an Author
+GET http://localhost:4004/catalog/Authors(42)?$expand=books
+
+### Create new Author
+POST http://localhost:4004/catalog/Authors
+Content-Type: application/json
+
+{
+  "ID": 1,
+  "name": "Gregor Wolf"
+}
+
+
+### Update Author
+PUT http://localhost:4004/catalog/Authors(1)
+Content-Type: application/json
+
+{
+  "name": "Gregor Jedl"
+}
+
+### Delete Author
+DELETE http://localhost:4004/catalog/Authors(1)
+
+### Create Order
+POST http://localhost:4004/catalog/Orders
+Content-Type: application/json
+
+{"book_ID":421, "quantity":5}
+
+### Create Order
+POST http://localhost:4004/catalog/Orders
+Content-Type: application/json
+
+{"book_ID":427, "quantity":5}
+
+### Create Orders
+### Perhaps failing due to https://github.com/Huachao/vscode-restclient/issues/232
+POST http://localhost:4004/catalog/$batch
+Content-Type: multipart/mixed; boundary=batch_36522ad7-fc75-4b56-8c71-56071383e77b 
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+POST Orders HTTP/1.1 
+Content-Type: application/json
+
+{"book_ID":421, "quantity":5}
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b--
+
+### Read Order
+GET http://localhost:4004/catalog/Orders
+
+### Read Order
+GET http://localhost:4004/catalog/Orders
+
+### Read OrderInfo
+http://localhost:4004/stats/OrderInfo
